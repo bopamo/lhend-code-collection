@@ -1,0 +1,25 @@
+/** 
+ * @page REL_NOTES Release Notes  
+ *
+ * @subpage REL_NOTES_V_0_1_0
+ */
+
+/** 
+ * @page REL_NOTES_V_0_1_0  v0.1.0 Release Notes
+ *
+ *  @section NOTES Notes:
+ *   - Hello World!
+ *   - Target support:
+ *       - MSP430G2553 on MSP-EXP430G2 with TI CCSTUDIO IDE
+ *
+ * @section CHANGES Changes:
+ *   -
+ *
+ * @section BUG_FIX Bug fix: 
+ *   -
+ *
+ * @section FUTURE_PLAN Future Plan:
+ *   -
+ *
+ */
+
