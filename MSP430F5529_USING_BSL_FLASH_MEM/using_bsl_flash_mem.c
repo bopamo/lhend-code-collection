@@ -59,12 +59,18 @@
 // Macros (defines), data types, static variables
 //*****************************************************************************
 
+// constants to be placed in BSL Flash memory
 #pragma SET_DATA_SECTION (".bsl0")
 const uint8_t const1 = 123;
 const uint16_t const2 = 2500;
 const uint32_t const3 = 1323;
 #pragma SET_DATA_SECTION ()
 
+// reserved memory location - do not touch
+#pragma RETAIN(bsl_reserved)
+#pragma DATA_SECTION(bsl_reserved, ".bsl3_res")
+const uint8_t bsl_reserved[0x0E] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+									0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 //*****************************************************************************
 // Internal function declarations
@@ -144,7 +150,7 @@ static uint16_t addition(uint16_t a, uint16_t b)
 * @return     substraction result of input a to b
 *
 ******************************************************************************/
-#pragma CODE_SECTION (substraction, ".bsl1")
+#pragma CODE_SECTION (substraction, ".bsl2")
 static uint16_t substraction(uint16_t a, uint16_t b)
 {
   return (a-b);
@@ -167,7 +173,9 @@ int _system_pre_init(void)
   WDTCTL = WDTPW + WDTHOLD;
 
   // make sure to release protection for the used BSL flash memory
-  SYSBSLC = 0;
+  // and keep the protection for BSL3 containing reserved area used
+  // for JTAG lock, etc.
+  SYSBSLC = SYSBSLPE | SYSBSLOFF;
 
   // Perform C/C++ global data initialization
   return 1;

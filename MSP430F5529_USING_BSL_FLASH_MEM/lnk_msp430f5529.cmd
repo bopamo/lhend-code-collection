@@ -60,8 +60,8 @@ MEMORY
     BSL0					: origin = 0x1000, length = 0x0200
     BSL1					: origin = 0x1200, length = 0x0200
     BSL2					: origin = 0x1400, length = 0x0200
-    // BSL 3 should not be used due because JTAG access is located in this section
-    //BSL3					: origin = 0x1600, length = 0x0200
+    BSL3					: origin = 0x1600, length = 0x01F2
+    BSL3_RESERVED		    : origin = 0x17F2, length = 0x000E
     USBRAM                  : origin = 0x1C00, length = 0x0800
     INFOA                   : origin = 0x1980, length = 0x0080
     INFOB                   : origin = 0x1900, length = 0x0080
@@ -165,6 +165,8 @@ SECTIONS
     .bsl0      : {} > BSL0
     .bsl1      : {} > BSL1
     .bsl2      : {} > BSL2
+    .bsl3      : {} > BSL3
+    .bsl3_res  : {} > BSL3_RESERVED
 
 
     /* MSP430 INTERRUPT VECTORS          */
